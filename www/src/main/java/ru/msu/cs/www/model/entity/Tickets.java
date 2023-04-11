@@ -35,7 +35,6 @@ public class Tickets {
     @Type(type = "org.hibernate.type.TextType")
     private String status;
 
-    @Lob
     @Column(name = "price", nullable = false)
     private Integer price;
 

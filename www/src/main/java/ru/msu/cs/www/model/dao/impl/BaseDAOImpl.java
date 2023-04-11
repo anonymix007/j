@@ -3,8 +3,6 @@ package ru.msu.cs.www.model.dao.impl;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import ru.msu.cs.www.model.HibernateConfiguration;
 import ru.msu.cs.www.model.dao.BaseDAO;
 

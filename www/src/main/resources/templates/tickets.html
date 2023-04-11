@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Оформление билета</title>
+    <link href="/base.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootswatch@5.2.3/dist/minty/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+    <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"  crossorigin="anonymous"></script>
+</head>
+<body>
+
+<div th:replace="fragments::navbar"></div>
+
+<main>
+    <div class="container-fluid">
+        <div class="row">
+            <h2>Оформление билета</h2>
+        </div>
+        <div class="row margin-top-mid">
+            <div class="col-3">
+                <form action="/tickets/add/" method="post">
+                    <div class="mb-3">
+                        <label for="flightId" class="form-label">ID рейса</label>
+                        <input type="number" class="form-control" id="flightId" name="flight_id">
+                    </div>
+                    <div class="mb-3">
+                        <label for="userId" class="form-label">ID пассажира</label>
+                        <input type="number" class="form-control" id="userId" name="user_id">
+                    </div>
+                    <div class="mb-3">
+                        <label for="status" class="form-label">Статус билета</label>
+                        <input type="text" class="form-control" id="status" name="status">
+                    </div>
+                    <div class="mb-3">
+                        <label for="price" class="form-label">Цена билета (уплачено в кассу)</label>
+                        <input type="text" class="form-control" id="pricce" name="price">
+                    </div>
+                    <button class="btn btn-lg btn-primary" type="submit">Оформить</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</main>
+
+</body>
+</html>

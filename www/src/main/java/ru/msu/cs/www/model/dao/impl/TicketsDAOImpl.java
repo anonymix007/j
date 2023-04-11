@@ -2,7 +2,6 @@ package ru.msu.cs.www.model.dao.impl;
 
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
-import ru.msu.cs.www.model.HibernateConfiguration;
 import ru.msu.cs.www.model.dao.TicketsDAO;
 import ru.msu.cs.www.model.entity.Tickets;
 
@@ -11,9 +10,7 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import javax.transaction.Transactional;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 
 @Transactional
 public class TicketsDAOImpl extends BaseDAOImpl<Tickets> implements TicketsDAO {
@@ -42,6 +39,10 @@ public class TicketsDAOImpl extends BaseDAOImpl<Tickets> implements TicketsDAO {
         if (filter.getMaxPrice() != null) {
             Integer maxPrice = filter.getMaxPrice();
             predicates.add(builder.ge(builder.literal(maxPrice), root.get("price")));
+        }
+        if (filter.getUserId() != null) {
+            Integer userid = filter.getUserId();
+            predicates.add(builder.equal(root.get("userId"), userid));
         }
 
         if (predicates.size() != 0)

@@ -2,7 +2,6 @@ package ru.msu.cs.www.model.dao.impl;
 
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
-import ru.msu.cs.www.model.HibernateConfiguration;
 import ru.msu.cs.www.model.dao.AirportsDAO;
 import ru.msu.cs.www.model.entity.Airports;
 

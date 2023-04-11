@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>История полетов</title>
+    <link href="/base.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootswatch@5.2.3/dist/minty/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+    <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"  crossorigin="anonymous"></script>
+</head>
+<body>
+
+<div th:replace="fragments::navbar"></div>
+
+
+
+<main>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-5"></div>
+            <div class="col-2">
+                <form action="/history/" method="post">
+                    <div class="mb-3">
+                        <label for="userIdInput" class="form-label">ID пассажира</label>
+                        <input type="number" class="form-control" id="userIdInput" name="user_id">
+                    </div>
+                    <button class="btn btn-md btn-primary" type="submit">Получить историю полетов</button>
+                </form>
+            </div>
+            <div class="col-5"></div>
+        </div>
+        <div class="row margin-top-mid" th:if="${result}">
+            <div class="col-4"></div>
+            <div class="col-4">
+                <div class="accordion width-max" id="accordionElems">
+                    <div th:each="flight : ${flights}" class="accordion-item">
+                        <h2 class="accordion-header" th:id="'flightheader-' + ${flight.getId()}">
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne"
+                                    th:text="'ID: ' + ${flight.getId()}">
+                            </button>
+                        </h2>
+                        <div th:id="'collapse-' + ${flight.getId()}" class="accordion-collapse collapse show" th:aria-labelledby="'flightheader-' + ${flight.getId()}" data-bs-parent="#accordionElems">
+                            <div class="accordion-body">
+                                <ul class="list-group">
+                                    <li class="list-group-item" th:text="'Аэропорт отправления: ' + ${flight.getAirportIdDep().getAirportName()}"></li>
+                                    <li class="list-group-item" th:text="'Аэропорт прибытия: ' + ${flight.getAirportIdArr().getAirportName()}"></li>
+                                    <li class="list-group-item" th:text="'Время отправления: ' + ${flight.getTimeDep()}"></li>
+                                    <li class="list-group-item" th:text="'Время прилета: ' + ${flight.getTimeArr()}"></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div th:if="${flights.empty}" style="text-align: center;">
+                        <h2 class="accordion-header">
+                            Рейсы не найдены
+                        </h2>
+                        <img src="https://www.pngmart.com/files/11/Sad-Pepe-The-Frog-PNG-Image.png" alt="Sad" width="474" height="354">
+                    </div>
+                </div>
+            </div>
+            <div class="col-4"></div>
+        </div>
+    </div>
+</main>
+
+</body>
+</html>

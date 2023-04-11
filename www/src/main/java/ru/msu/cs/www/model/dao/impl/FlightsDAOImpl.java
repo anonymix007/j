@@ -2,10 +2,8 @@ package ru.msu.cs.www.model.dao.impl;
 
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
-import ru.msu.cs.www.model.HibernateConfiguration;
 import ru.msu.cs.www.model.dao.FlightsDAO;
 import ru.msu.cs.www.model.entity.Flights;
-import ru.msu.cs.www.utils.TimeConvertUtil;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;

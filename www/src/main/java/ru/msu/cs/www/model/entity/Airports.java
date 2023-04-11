@@ -35,6 +35,10 @@ public class Airports {
     @Type(type = "org.hibernate.type.TextType")
     private String city;
 
+    public String getAirportName() {
+        return getCountry() + " - " + getCity();
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

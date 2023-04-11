@@ -11,6 +11,7 @@ public interface TicketsDAO extends BaseDAO<Tickets> {
     @Getter
     class Filter {
         private String status;
+        private Integer userId;
         private Integer minPrice;
         private Integer maxPrice;
     }
