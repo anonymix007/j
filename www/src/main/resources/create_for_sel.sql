@@ -60,3 +60,29 @@ CREATE TABLE IF NOT EXISTS bonuses(
                                       cnt_km INTEGER CHECK ( cnt_km >= 0 ) NOT NULL,
                                       cnt_used INTEGER CHECK ( cnt_used >= 0 ) NOT NULL
 );
+
+INSERT INTO planes (model_name)
+VALUES ('Boeing 777-300'),
+       ('Boeing 767-300'),
+       ('Sukhoi Superjet-100'),
+       ('Airbus A320-200'),
+       ('Boeing 737-300'),
+       ('MC-21');
+
+INSERT INTO airports (country, city)
+VALUES ('Russia', 'Moscow'),
+       ('Russia', 'Saint Petersburg'),
+       ('Russia', 'Novosibirsk'),
+       ('Russia', 'Kazan'),
+       ('USA', 'New York'),
+       ('China', 'Beijing'),
+       ('Canada', 'Toronto'),
+       ('Syria', 'Damascus'),
+       ('Belarus', 'Minsk');
+
+INSERT INTO airlines (name, email, phone_number)
+VALUES ('Aeroflot', NULL, '88004445555'),
+       ('S7 Airlines', NULL, '88007000707'),
+       ('Nordwind Airlines', NULL, '84957305080'),
+       ('Pegas Fly', NULL, '84954784944'),
+       ('Utair', NULL, '88002340088');
