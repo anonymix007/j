@@ -37,6 +37,9 @@
                                 <a th:href="'/passengers/edit/' + ${passenger.getId()}">
                                     <button class="btn btn-md btn-primary" th:text="Редактировать"></button>
                                 </a>
+                                <a th:href="'/history/' + ${passenger.getId()}">
+                                    <button class="btn btn-md btn-info" th:text="История"></button>
+                                </a>
                             </div>
                         </div>
                     </div>

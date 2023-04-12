@@ -39,6 +39,9 @@
                                 <a th:href="'/flights/edit/' + ${flight.getId()}">
                                     <button class="btn btn-md btn-primary" th:text="Редактировать"></button>
                                 </a>
+                                <a th:href="'/tickets/add/' + ${flight.getId()}">
+                                    <button class="btn btn-md btn-info" th:text="Билет"></button>
+                                </a>
                             </div>
                         </div>
                     </div>

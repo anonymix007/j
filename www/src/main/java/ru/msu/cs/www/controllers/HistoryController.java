@@ -3,6 +3,7 @@ package ru.msu.cs.www.controllers;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import ru.msu.cs.www.model.entity.Passengers;
@@ -23,6 +24,14 @@ public class HistoryController {
     public String history(Model model) {
         model.addAttribute("result", false);
         return "history";
+    }
+
+    @GetMapping("/history/{user_id}")
+    @SuppressWarnings("unused")
+    public String history_from_pass(
+            @PathVariable(name = "user_id") Integer user_id,
+            Model model) {
+        return history_result(user_id, model);
     }
 
     @PostMapping("/history/")

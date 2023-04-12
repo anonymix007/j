@@ -4,6 +4,7 @@ import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -23,6 +24,14 @@ public class TicketController {
     public String tickets_page() {
         return "tickets";
     }
+
+    @GetMapping("/tickets/add/{flight_id}")
+    @SuppressWarnings("unused")
+    public String tickets_from_history(
+            @PathVariable(name = "flight_id") Integer flightId) {
+        return "tickets";
+    }
+
 
     @GetMapping("/tickets/success/")
     public String tickets_success(Model model) {
@@ -44,24 +53,25 @@ public class TicketController {
 
     @PostMapping("/tickets/add/")
     public String tickets_add(
-            Model model,
             RedirectAttributes redirectAttributes,
             @RequestParam(name = "flight_id") Integer flight_id,
-            @RequestParam(name = "user_id") Integer user_id,
+            @RequestParam(name = "user_id") Integer[] user_ids,
             @RequestParam(name = "status") String status,
             @RequestParam(name = "price") Integer price
     ) {
         try {
-            Flights flight = new FlightsDAOImpl().getById(flight_id);
-            Passengers passenger = new PassengersDAOImpl().getById(user_id);
-            Tickets ticket = new Tickets();
-            ticket.setFlightId(flight);
-            ticket.setStatus(status);
-            ticket.setUserId(passenger);
-            ticket.setPrice(price);
-            new TicketsDAOImpl().add(ticket);
-            flight.setCntAvailableSeats(flight.getCntAvailableSeats() - 1);
-            new FlightsDAOImpl().update(flight);
+            for(Integer user_id: user_ids) {
+                Flights flight = new FlightsDAOImpl().getById(flight_id);
+                Passengers passenger = new PassengersDAOImpl().getById(user_id);
+                Tickets ticket = new Tickets();
+                ticket.setFlightId(flight);
+                ticket.setStatus(status);
+                ticket.setUserId(passenger);
+                ticket.setPrice(price);
+                new TicketsDAOImpl().add(ticket);
+                flight.setCntAvailableSeats(flight.getCntAvailableSeats() - 1);
+                new FlightsDAOImpl().update(flight);
+            }
             return "redirect:/tickets/success/";
         }catch (PersistenceException e) {
             e.printStackTrace();

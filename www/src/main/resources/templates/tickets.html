@@ -6,6 +6,33 @@
     <link href="/base.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootswatch@5.2.3/dist/minty/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
     <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"  crossorigin="anonymous"></script>
+    <script>
+        ids = 1;
+        function post() {
+            alert('submitted!');
+        }
+        function add() {
+            ids++;
+            //alert(ids);
+            var inputContainer = document.getElementById("id-container");
+            var newInput = document.createElement("input");
+            newInput.type = "number";
+            newInput.name = "user_id";
+            newInput.id = "userId" + ids;
+            newInput.classList.add("form-control");
+            inputContainer.appendChild(newInput);
+            //inputContainer.insertBefore(newInput, document.getElementById("userId" + (ids - 1)));
+
+        }
+        function del() {
+            if (ids > 1) {
+                var inputContainer = document.getElementById("id-container");
+                var removedInput = document.getElementById("userId" + ids--);
+                inputContainer.removeChild(removedInput);
+            }
+            //alert(ids)
+        }
+    </script>
 </head>
 <body>
 
@@ -21,11 +48,13 @@
                 <form action="/tickets/add/" method="post">
                     <div class="mb-3">
                         <label for="flightId" class="form-label">ID рейса</label>
-                        <input type="number" class="form-control" id="flightId" name="flight_id">
+                        <input type="number" class="form-control" id="flightId" name="flight_id" th:value="${flight_id}">
                     </div>
-                    <div class="mb-3">
+                    <div class="mb-3" id="id-container">
                         <label for="userId" class="form-label">ID пассажира</label>
-                        <input type="number" class="form-control" id="userId" name="user_id">
+                        <button class="btn btn-lg btn-info" style="height:42px;width:42px" id="add_id_field" onclick="add()" type="button">+</button>
+                        <button class="btn btn-lg btn-warning" style="height:42px;width:42px" id="del_id_field" onclick="del()" type="button">-</button>
+                        <input type="number" class="form-control" id="userId1" name="user_id">
                     </div>
                     <div class="mb-3">
                         <label for="status" class="form-label">Статус билета</label>
